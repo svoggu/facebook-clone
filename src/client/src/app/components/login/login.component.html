@@ -1,0 +1,41 @@
+<div class="login-container">
+  <header class="login__header">
+    <div class="login__header__left">
+      <img alt="logo" src="assets/fb-logo-1.jpg" />
+      <h2>
+        Facebook helps you connect and share with the people in your life.
+      </h2>
+    </div>
+    <div class="login__header__right">
+      <mat-card class="login__header__right__card">
+        <mat-card-content class="login__header__right__card__content">
+          <form [formGroup]="loginForm" class="login-form">
+            <input type="text" formControlName="email" placeholder="email" />
+            
+            <input
+              type="text"
+              formControlName="password"
+              placeholder="password"
+            />
+            
+            <button (click)="login()" class="login-button">Login</button>
+          </form>
+          <a>Forgotten account?</a>
+          <hr />
+          <!-- <button class="create-account" (click)="openRegister()">Create New Account</button> -->
+          <button class="create-account">
+            <a routerLink="/register">Create New Account</a>
+          </button>
+        </mat-card-content>
+      </mat-card>
+
+      <p class="tagline">
+        <strong>Create a Page</strong> for a celebrity, band or business.
+      </p>
+    </div>
+  </header>
+
+  <footer class="login__footer">
+    <img alt="footer" src="assets/footer_crop.jpg" />
+  </footer>
+</div>
