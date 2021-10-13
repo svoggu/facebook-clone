@@ -25,7 +25,7 @@ export class UserService {
   login(user: Partial<User>) {
     return this.api
       .post<{ data: User }>('login', user)
-      .pipe(map((res) => res.data),tap(()=> this.router.navigate(['users']) ))
+      .pipe(map((res) => res.data),tap(()=> this.router.navigate(['home']) ))
       // catchError(()=> this.router.navigate(['register'])));
         }
 
