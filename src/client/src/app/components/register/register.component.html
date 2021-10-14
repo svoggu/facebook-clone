@@ -6,8 +6,8 @@
     </div>
   
     <div class="body">
-      <!-- <form #form="ngForm"> -->
-        <form>
+      <form #form="ngForm">
+        <!-- <form> -->
         <div class="user_name"> 
           <!-- <input type="text" placeholder="FirstName" formControlName="fname"> 
           <input type="text" placeholder="LastName" formControlName="lname"> -->
@@ -25,9 +25,9 @@
   
         <p>By clicking Sign Up, you agree to our Terms, Data Policy and Cookie Policy. You may receive SMS notifications from us and can opt out at any time.</p>
   
-        <!-- <button type="submit" class="submit-button" [mat-dialog-close]="form.value">Sign Up</button> -->
+        <button type="submit" class="submit-button" [mat-dialog-close]="form.value">Sign Up</button>
        
-    <button type="submit" class="submit-button">Sign Up</button>
+    <!-- <button type="submit" class="submit-button">Sign Up</button> -->
     </form>
     </div>
   </section> 

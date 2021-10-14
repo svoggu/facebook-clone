@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 
@@ -23,9 +24,18 @@ export class HomeComponent implements OnInit {
  // user: UserData;
 
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
+  goToUsers(){
+    this.router.navigate(['/users']);
+  }
+
+  logout() {
+    this.router.navigate(['/login']);
+  }
+
+  
 }
