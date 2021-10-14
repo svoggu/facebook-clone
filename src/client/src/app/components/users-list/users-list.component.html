@@ -1,7 +1,9 @@
 
 <ol>
     <li [ngStyle]= "{ color: checkSelected(selectedUser, user) }" *ngFor='let user of users'>
-        name: {{user.name}} <br>
+        {{user.name}}
+        <br>
+        <!-- name: {{user.name}}  -->
         <!-- email: {{user.email}} <br> -->
         <!-- username: {{user.username}} <br> -->
         <!-- id: {{user._id}} -->
