@@ -43,9 +43,9 @@ export class LoginComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (changes?.selectedUser?.currentValue) {
       const user = changes?.selectedUser?.currentValue;
-      // this.loginForm.get('name')?.setValue(user.name);
+      
       this.loginForm.get('email')?.setValue(user.email);
-      // this.loginForm.get('username')?.setValue(user.username);
+      
       this.loginForm.updateValueAndValidity();
     }
     }
@@ -53,5 +53,9 @@ export class LoginComponent implements OnInit, OnChanges {
     login() {
       this.store.dispatch(loginUser({ data: this.loginForm.value }));
       // this.router.navigate(['users'])
+    }
+
+    openRegister() {
+       this.router.navigate(['register']);
     }
 }
