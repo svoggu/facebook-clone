@@ -1,4 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -21,6 +22,7 @@ export class UsersListComponent implements OnInit {
   constructor(
     private userService: UserService,
     private store: Store<AppState>,
+    private router: Router,
     ) {
 
 
@@ -47,6 +49,10 @@ export class UsersListComponent implements OnInit {
 
   isSelected(selectedUser: User | null, user: User) {
     return selectedUser?._id === user._id;
+  }
+
+  goToHome(){
+    this.router.navigate(['/Home']);
   }
 
 }

@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
 ];
   subs: Subscription[] = [];
   posts: any[] = [];
- // user: UserData;
+//  user: UserData;
 
 
   constructor(private router: Router) { }

@@ -22,6 +22,8 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from './models/material.module';
 import { MatIconModule } from '@angular/material/icon';
 import { HomeModule } from './components/home/home.module';
+import { PostsComponent } from './components/posts/posts.component';
+
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import { HomeModule } from './components/home/home.module';
     PageUsersComponent,
     RegisterComponent,
     LoginComponent,
+    PostsComponent,
    
   ],
   imports: [
