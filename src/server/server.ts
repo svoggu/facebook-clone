@@ -68,18 +68,19 @@ app.get("/users", authHandler, function (req: any, res) {
 // });
 
 app.post("/create-user", function (req, res) {
-  const { name, email, username, password } = req.body;
+  const { firstname, email, lastname, password } = req.body;
 
   bcrypt.genSalt(saltRounds, function (err, salt) {
     bcrypt.hash(password, salt, function (err, hash) {
       const user = new UserModel({
-        name,
-        username,
+        firstname,
+        lastname,
         email,
         password: hash,
       });
+
       user
-        .save()
+      .save()
         .then((data) => {
           res.json({ data });
         })
@@ -136,6 +137,14 @@ app.put("/update-user/:id", function (req, res) {
   );
 });
 
+app.get('/logout', authHandler,function(req,res){
+  res.cookie('jwt', '', {
+    httpOnly: true,
+    maxAge: 60*60 * 1000,
+})
+res.json({message: 'Successfully Logged out'})
+})
+
 app.post("/login", function (req, res) {
   const { email, password } = req.body;
 
@@ -161,6 +170,10 @@ app.post("/login", function (req, res) {
       return res.sendStatus(404);
     });
 });
+
+app.get('/check-login', authHandler, (req, res) => {
+  res.json({message: 'yes'});
+})
 
 app.listen(PORT, function () {
   console.log(`starting at localhost http://localhost:${PORT}`);

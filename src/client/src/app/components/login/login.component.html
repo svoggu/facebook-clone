@@ -10,13 +10,9 @@
       <mat-card class="login__header__right__card">
         <mat-card-content class="login__header__right__card__content">
           <form [formGroup]="loginForm" class="login-form">
-            <input type="text" formControlName="email" placeholder="email" />
+            <input type="text" formControlName="email" placeholder="email"  />
             
-            <input
-              type="text"
-              formControlName="password"
-              placeholder="password"
-            />
+            <input type="password" formControlName="password" placeholder="password" />
             
             <button (click)="login()" class="login-button">Login</button>
           </form>

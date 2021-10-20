@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Action } from '@ngrx/store';
-import { EMPTY, Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { UserService } from 'src/app/services/user.service';
@@ -20,6 +19,9 @@ import {
   loginUser,
   loginUserFailure,
   loginUserSuccess,
+  logoutUser,
+  logoutUserFailure,
+  logoutUserSuccess,
   updateUser,
   updateUserFailure,
   updateUserSuccess,
@@ -95,6 +97,18 @@ loginFailure$ = createEffect(() =>
      this.router.navigate(['register']);
      return of(loginFailureRedirect()) }
       
+    )
+  )
+);
+
+logoutUsers$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(logoutUser),
+    mergeMap((action) =>
+      this.userService.logout().pipe(
+        map((data) => logoutUserSuccess()),
+        catchError((error) => of(logoutUserFailure()))
+      )
     )
   )
 );

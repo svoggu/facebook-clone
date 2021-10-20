@@ -16,14 +16,14 @@ export class RegisterComponent implements OnInit {
   selectedUser: User | null = null;
 constructor(private fb: FormBuilder, private store: Store<AppState>,private router:Router){
   this.addUser = this.fb.group({
-    name: ['', Validators.required],
+    firstname: ['', Validators.required],
     email: [
       '',
       Validators.compose([Validators.required, Validators.minLength(3)]),
     ],
-    username: [
+    lastname: [
       '',
-      Validators.compose([Validators.required, Validators.minLength(3)]),
+      Validators.compose([Validators.required, Validators.minLength(1)]),
     ],
     password: [
       '',

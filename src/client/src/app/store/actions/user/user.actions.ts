@@ -86,12 +86,14 @@ export const loginFailureRedirect = createAction(
   
 );
 
-// export const logoutUser = createAction(
-//   '[User] Logout User',
-//   props<{data: Partial<User>}>()
-// );
+export const logoutUser = createAction(
+  '[User] Logout User',
+ );
 
-// export const logoutUserSuccess = createAction(
-//   '[User] Logout User Success',
-//   props<{ data: User }>()
-// );
+export const logoutUserSuccess = createAction(
+  '[User] Logout User Success',
+  );
+
+export const logoutUserFailure = createAction(
+  '[User] Login User Failure',
+  );

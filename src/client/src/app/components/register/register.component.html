@@ -7,13 +7,13 @@
   <div class="body">
     <form [formGroup]="addUser">
       <div class="user_name">
-        <input type="text" placeholder="FirstName" formControlName="name" />
-        <input type="text" placeholder="LastName" formControlName="username" />
+        <input type="text" placeholder="FirstName" formControlName="firstname" />
+        <input type="text" placeholder="LastName" formControlName="lastname" />
       </div>
 
       <div class="email_password">
         <input type="text" formControlName="email" placeholder="email" />
-        <input type="text" placeholder="Image Url" name="avatar" ngModel />
+        <!-- <input type="text" formControlName="imageurl" placeholder="Image Url" /> -->
         <input type="text" formControlName="password" placeholder="password" />
       </div>
 

@@ -10,17 +10,18 @@
 
 <ul>
     <li [ngStyle]= "{ color: checkSelected(selectedUser, user) }" *ngFor='let user of users'>
-        {{user.name}}
-        <br>
-        <br>
+        {{user.firstname}}  {{user.lastname}}
+        <!-- <br> -->
+        
     
         <!-- name: {{user.name}}  -->
         <!-- email: {{user.email}} <br> -->
         <!-- username: {{user.username}} <br> -->
         <!-- id: {{user._id}} -->
-        <!-- <button (click) = "deleteUser(user)">Delete</button>
-        <button (click) = "selectUser(user, selectedUser)">Select & Update</button> -->
+        <button (click) = "deleteUser(user)">X</button>
+        <!-- <button (click) = "selectUser(user, selectedUser)">Select & Update</button> -->
        
     </li>
 </ul>  
+
 

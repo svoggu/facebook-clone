@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit, OnChanges {
   selectedUser$: Observable<User | null>;
   loginForm: FormGroup;
   @Input() selectedUser: User | null = null;
+
   constructor(private fb: FormBuilder, private store: Store<AppState>,private router:Router)
    { 
     this.users$ = this.store.select(usersSelector);

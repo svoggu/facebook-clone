@@ -35,7 +35,8 @@ export class UserService {
 
   logout() {
     
-    return of(this.router.navigate(['/login']));
+    this.router.navigate(['/login']);
+    return this.api.get('logout')
           
         }
 

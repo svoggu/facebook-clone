@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
+import { AppState } from 'src/app/store';
+import { logoutUser } from 'src/app/store/actions/user/user.actions';
 
 
 
@@ -19,12 +22,13 @@ export class HomeComponent implements OnInit {
   'https://c0.wallpaperflare.com/preview/956/761/225/5be97da101a3f.jpg',
   'https://upload.wikimedia.org/wikipedia/commons/9/9a/Swepac_FB_465%2C_RV70%2C_with_passing_lorry.jpg'
 ];
-  subs: Subscription[] = [];
+  // subs: Subscription[] = [];
   posts: any[] = [];
 //  user: UserData;
 
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private store: Store<AppState>) { }
 
   ngOnInit(): void {
   }
@@ -34,7 +38,9 @@ export class HomeComponent implements OnInit {
   }
 
   logout() {
-    this.router.navigate(['/login']);
+    
+    this.store.dispatch(logoutUser());
+    
   }
 
   
