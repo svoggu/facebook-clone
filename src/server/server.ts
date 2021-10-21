@@ -13,10 +13,6 @@ dotenv.config();
 const access_secret = process.env.ACCESS_TOKEN_SECRET as string;
 console.log(access_secret);
 
-
-
-
-
 const saltRounds = 10;
 
 const app = express();
@@ -49,6 +45,24 @@ app.get("/posts", function (req, res) {
     });
 });
 
+app.post("/create-post", function (req, res) {
+  const { title, body } = req.body;
+  const post = new PostModel({
+    title,
+    body,
+  });
+
+  post
+  .save()
+    .then((data) => {
+      res.json({ data });
+    })
+    .catch((err) => {
+      res.status(501);
+      res.json({ errors: err });
+    });
+});
+
 app.get("/users", authHandler, function (req: any, res) {
   UserModel.find({}, '-password')
     .then((data) => res.json({ data }))
@@ -57,15 +71,6 @@ app.get("/users", authHandler, function (req: any, res) {
       res.json({ errors: err });
     });
 });
-
-// app.get('/users', function(req,res){
-//   UserModel.find()
-//   .then(data => res.json({data}))
-//   .catch(err => {
-//       res.status(501)
-//       res.json({errors: err});
-//   })
-// });
 
 app.post("/create-user", function (req, res) {
   const { firstname, email, lastname, password } = req.body;
@@ -92,22 +97,7 @@ app.post("/create-user", function (req, res) {
   });
 });
 
-app.post("/create-post", function (req, res) {
-  const { title, body } = req.body;
-  const post = new PostModel({
-    title,
-    body,
-  });
-  post
-    .save()
-    .then((data) => {
-      res.json({ data });
-    })
-    .catch((err) => {
-      res.status(501);
-      res.json({ errors: err });
-    });
-});
+
 
 app.delete("/delete-user/:id", function (req, res) {
   const _id = req.params.id;

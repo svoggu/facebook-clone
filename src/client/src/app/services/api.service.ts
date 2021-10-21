@@ -16,7 +16,7 @@ export class ApiService {
       withCredentials: true
     });
   }
-  post<T>(resourceName: string, data: Postable) {
+  post<T,D>(resourceName: string, data: D) {
     return this.http.post<T>(this.baseUrl + resourceName, data, {
       withCredentials: true
     });
@@ -26,7 +26,7 @@ export class ApiService {
     return this.http.delete<T>(this.baseUrl + resourceName);
   }
 
-  put<T>(resourceName: string, data: Postable) {
+  put<T,D>(resourceName: string, data: D) {
     return this.http.put<T>(this.baseUrl + resourceName, data);
   }
 }

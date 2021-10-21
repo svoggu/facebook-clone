@@ -6,7 +6,8 @@
   <option value="home">Home</option> 
   <option value="google">Google</option> 
 </select>
-<br>
+<br><br>
+<a routerLink="/posts">Posts</a>
 
 <ul>
     <li [ngStyle]= "{ color: checkSelected(selectedUser, user) }" *ngFor='let user of users'>

@@ -1,1 +1,14 @@
 <p>posts works!</p>
+<form [formGroup] = 'addPost'>
+
+    <input type="text" formControlName='title' placeholder="title">
+    <input type="text" formControlName='body' placeholder="body">
+    <button (click)="AddPost()">Add Post</button>
+
+</form>
+
+<ul>
+    <li *ngFor = "let p of posts$ | async"> 
+        {{p.title}} : {{p.body}}
+    </li>
+</ul>

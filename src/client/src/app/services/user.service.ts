@@ -4,6 +4,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { User } from '../../../../shared/models/user.model';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
+import { Post } from '../../../../shared/models/post.model';
 
 @Injectable({
   providedIn: 'root',
@@ -19,12 +20,12 @@ export class UserService {
   }
   createUser(user: User) {
     return this.api
-      .post<{ data: User }>('create-user', user)
+      .post<{ data: User }, User>('create-user', user)
       .pipe(map((res) => res.data));
   }
   login(user: Partial<User>) {
     return this.api
-      .post<{ data: User }>('login', user)
+      .post<{ data: User },Partial<User>>('login', user)
       .pipe(map((res) => res.data),tap(()=> this.router.navigate(['home']) ))
       // catchError(()=> this.router.navigate(['register'])));
         }
@@ -41,7 +42,7 @@ export class UserService {
         }
 
   updateUser(user: User) {
-    return this.api.put<User>('update-user/' + user._id, user);
+    return this.api.put<{data:User},User>('update-user/' + user._id, user).pipe(map(res => res.data));
   }
 
   deleteUser(user: User) {
@@ -53,4 +54,6 @@ export class UserService {
   selectUser(id: string) {
     this.selectedUserId = id;
   }
+
+  
 }

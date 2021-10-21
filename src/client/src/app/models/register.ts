@@ -1,1 +1,1 @@
-import { Register } from "../../../../shared/models/register.model"
+import { Register } from "../../../../shared/models/register.model";

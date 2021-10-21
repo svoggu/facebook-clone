@@ -23,6 +23,8 @@ import { MaterialModule } from './models/material.module';
 import { MatIconModule } from '@angular/material/icon';
 import { HomeModule } from './components/home/home.module';
 import { PostsComponent } from './components/posts/posts.component';
+import * as fromPost from './store/reducers/post/post.reducer';
+import { PostEffects } from './store/effects/post/post.effects';
 
 
 @NgModule({
@@ -48,8 +50,9 @@ import { PostsComponent } from './components/posts/posts.component';
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreModule.forFeature(fromUser.userFeatureKey, fromUser.reducer),
-    EffectsModule.forRoot([UserEffects]),
+    EffectsModule.forRoot([UserEffects, PostEffects]),
     HomeModule,
+    StoreModule.forFeature(fromPost.postFeatureKey, fromPost.reducer),
         
   ],
   providers: [],

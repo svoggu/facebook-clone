@@ -21,7 +21,7 @@ import { User } from '../../../../../shared/models/user.model';
   styleUrls: ['./user-input.component.scss'],
 })
 export class UserInputComponent implements OnInit, OnChanges {
-  
+
   addUser: FormGroup;
 
   @Input() selectedUser: User | null = null;
@@ -37,7 +37,7 @@ export class UserInputComponent implements OnInit, OnChanges {
       ],
       lastname: [
         '',
-        Validators.compose([Validators.required, Validators.minLength(3)]),
+        Validators.compose([Validators.required, Validators.minLength(1)]),
       ],
       password: [
         '',
@@ -49,6 +49,7 @@ export class UserInputComponent implements OnInit, OnChanges {
   ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges) {
+
     if (changes?.selectedUser?.currentValue) {
       const user = changes?.selectedUser?.currentValue;
       this.addUser.get('firstname')?.setValue(user.firstname);
