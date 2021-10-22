@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
@@ -14,7 +15,8 @@ import { User } from '../../../../../shared/models/user.model';
 export class RegisterComponent implements OnInit {
   addUser: FormGroup;
   selectedUser: User | null = null;
-constructor(private fb: FormBuilder, private store: Store<AppState>,private router:Router){
+constructor(private fb: FormBuilder, private store: Store<AppState>,private router:Router,
+  public dialogRef: MatDialogRef<RegisterComponent>){
   this.addUser = this.fb.group({
     firstname: ['', Validators.required],
     email: [
@@ -42,7 +44,7 @@ constructor(private fb: FormBuilder, private store: Store<AppState>,private rout
           updateUser({ data: { ...selectedUser, ...this.addUser.value } })
         );
     this.addUser.reset();
-    this.router.navigate(['login']);
+    // this.router.navigate(['login']);
   }
 
 }

@@ -1,12 +1,15 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { ApiService } from 'src/app/services/api.service';
 import { AppState } from 'src/app/store';
 import { loginUser } from 'src/app/store/actions/user/user.actions';
 import { selectedUserSelector, usersSelector } from 'src/app/store/selectors/user/user.selectors';
 import { User } from '../../../../../shared/models/user.model';
+import { RegisterComponent } from '../register/register.component';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +22,11 @@ export class LoginComponent implements OnInit, OnChanges {
   loginForm: FormGroup;
   @Input() selectedUser: User | null = null;
 
-  constructor(private fb: FormBuilder, private store: Store<AppState>,private router:Router)
+  constructor(private fb: FormBuilder, 
+              private store: Store<AppState>,
+              private router:Router,
+              private matDialog: MatDialog,
+              private apiService: ApiService)
    { 
     this.users$ = this.store.select(usersSelector);
     this.selectedUser$ = this.store.select(selectedUserSelector);
@@ -53,10 +60,21 @@ export class LoginComponent implements OnInit, OnChanges {
 
     login() {
       this.store.dispatch(loginUser({ data: this.loginForm.value }));
+      this.loginForm.reset();
       // this.router.navigate(['users'])
     }
 
-    openRegister() {
-       this.router.navigate(['register']);
+    // openRegister() {
+    //    this.router.navigate(['register']);
+    // }
+
+    openRegister(): void {
+      const dialogRef = this.matDialog.open(RegisterComponent, {
+        role: 'dialog',
+        height: '480px',
+        width: '480px'
+      });
+
+      
     }
-}
+  }
