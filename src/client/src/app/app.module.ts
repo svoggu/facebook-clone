@@ -17,12 +17,12 @@ import { PageUsersComponent } from './pages/page-users/page-users.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
-import { HomeComponent } from './components/home/home.component';
+// import { HomeComponent } from './components/home/home.component';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from './models/material.module';
-import { MatIconModule } from '@angular/material/icon';
+// import { MatIconModule } from '@angular/material/icon';
 import { HomeModule } from './components/home/home.module';
-import { PostsComponent } from './components/posts/posts.component';
+// import { PostsComponent } from './components/posts/posts.component';
 import * as fromPost from './store/reducers/post/post.reducer';
 import { PostEffects } from './store/effects/post/post.effects';
 
@@ -35,7 +35,7 @@ import { PostEffects } from './store/effects/post/post.effects';
     PageUsersComponent,
     RegisterComponent,
     LoginComponent,
-    PostsComponent,
+    
    
   ],
   imports: [

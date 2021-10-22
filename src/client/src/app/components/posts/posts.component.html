@@ -1,14 +1,22 @@
-<p>posts works!</p>
-<form [formGroup] = 'addPost'>
+<!-- <p>posts works!</p> -->
+<!-- <form [formGroup] = 'addPost'> -->
 
-    <input type="text" formControlName='title' placeholder="title">
-    <input type="text" formControlName='body' placeholder="body">
+    <!-- <input type="text" formControlName='title' placeholder="title"> -->
+    <!-- <input type="text" formControlName='message' placeholder="message">
     <button (click)="AddPost()">Add Post</button>
 
-</form>
+</form> -->
+
+
+<form [formGroup] = 'addPost'>
+    <input class="on-your-mind" formControlName="message" ngModel placeholder="What's on your mind?" type="text">
+    <!-- <button style="display: none;" type="submit" ></button> -->
+    <button style="display: none;" type="submit" (click)="AddPost()"></button>
+  </form> 
 
 <ul>
     <li *ngFor = "let p of posts$ | async"> 
-        {{p.title}} : {{p.body}}
+         {{p.message}}
+         <!-- <span>{{ p?.time?.seconds * 1000 | date:'shortTime' }}</span> -->
     </li>
 </ul>

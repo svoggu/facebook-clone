@@ -1,6 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { Post } from '../../../../../../shared/models/post.model';
-import { loadPostsSuccess } from '../../actions/post/post.actions';
+import { createPostSuccess, loadPostsSuccess } from '../../actions/post/post.actions';
 
 
 export const postFeatureKey = 'post';
@@ -20,7 +20,12 @@ export const reducer = createReducer(
   initialState,
   on(loadPostsSuccess, (state, action): State => {
     return {...state,posts:action.data}
-  })
+  }),
+  on(createPostSuccess, (state, action) => {
+    const posts = [...state.posts];
+    posts.push(action.data);
+    return {...state, posts}
+  }),
 
 );
 

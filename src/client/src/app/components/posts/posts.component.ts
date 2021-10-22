@@ -15,7 +15,7 @@ import { Post } from '../../../../../shared/models/post.model';
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.scss']
 })
-export class PostsComponent implements OnInit, OnChanges {
+export class PostsComponent implements OnInit{
 
   addPost: FormGroup;
   posts$: Observable<Post[]>;
@@ -35,8 +35,8 @@ export class PostsComponent implements OnInit, OnChanges {
 
     this.addPost = this.fb.group({
 
-      title: ['', Validators.required],
-      body: ['', Validators.required],
+      // title: ['', Validators.required],
+      message: ['', Validators.required],
 
     });
   }
@@ -45,27 +45,28 @@ export class PostsComponent implements OnInit, OnChanges {
     this.store.dispatch(loadPosts());
    }
 
-  ngOnChanges(changes: SimpleChanges) {
+  // ngOnChanges(changes: SimpleChanges) {
 
-    if (changes?.selectedUser?.currentValue) {
-      const post = changes?.selectedPost?.currentValue;
-      this.addPost.get('title')?.setValue(post.title);
-      this.addPost.get('body')?.setValue(post.body);
+  //   if (changes?.selectedUser?.currentValue) {
+  //     const post = changes?.selectedPost?.currentValue;
+      // this.addPost.get('title')?.setValue(post.title);
+      // this.addPost.get('message')?.setValue(post.message);
       
-      this.addPost.updateValueAndValidity();
-    }
-  }
+      // this.addPost.updateValueAndValidity();
+    // }
+  // }
 
-  postPost(selectedPost: Post | null) {
-    !selectedPost
-      ? this.store.dispatch(createPost({ data: this.addPost.value }))
-      : this.store.dispatch(
-          updatePost({ data: { ...selectedPost, ...this.addPost.value } })
-        );
-    this.addPost.reset();
-  }
+  // postPost(selectedPost: Post | null) {
+    // !selectedPost
+  //     ? this.store.dispatch(createPost({ data: this.addPost.value }))
+  //     : this.store.dispatch(
+  //         updatePost({ data: { ...selectedPost, ...this.addPost.value } })
+  //       );
+  //   this.addPost.reset();
+  // }
   AddPost(){
-    this.store.dispatch(createPost({ data: this.addPost.value }))
+    this.store.dispatch(createPost({ data: this.addPost.value }));
+    this.addPost.reset();
   }
 
 

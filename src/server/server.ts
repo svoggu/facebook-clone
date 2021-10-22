@@ -46,10 +46,10 @@ app.get("/posts", function (req, res) {
 });
 
 app.post("/create-post", function (req, res) {
-  const { title, body } = req.body;
+  const { message } = req.body;
   const post = new PostModel({
-    title,
-    body,
+   
+    message
   });
 
   post
