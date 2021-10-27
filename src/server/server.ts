@@ -112,7 +112,7 @@ app.put("/update-user/:id", function (req, res) {
   UserModel.findByIdAndUpdate(
     req.params.id,
     {
-      $set: { name: req.body.name, email: req.body.email },
+      $set: { firstname: req.body.firstname, email: req.body.email },
     },
     {
       new: true,

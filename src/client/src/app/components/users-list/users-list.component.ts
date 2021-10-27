@@ -16,6 +16,9 @@ import { User } from '../../../../../shared/models/user.model';
 })
 export class UsersListComponent implements OnInit {
 
+  users$: Observable<User[]>;
+  selectedUser$: Observable<User | null>;
+
   @Input() public users: User[] = [];
   @Input() public selectedUser: User | null = null;
 
@@ -24,7 +27,8 @@ export class UsersListComponent implements OnInit {
     private store: Store<AppState>,
     private router: Router,
     ) {
-
+      this.users$ = this.store.select(usersSelector);
+      this.selectedUser$ = this.store.select(selectedUserSelector);
 
   }
 

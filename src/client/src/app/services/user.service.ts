@@ -42,7 +42,7 @@ export class UserService {
         }
 
   updateUser(user: User) {
-    return this.api.put<{data:User},User>('update-user/' + user._id, user).pipe(map(res => res.data));
+    return this.api.put<{data:User},User>('update-user/' + user._id, user);
   }
 
   deleteUser(user: User) {

@@ -1,12 +1,12 @@
 <form [formGroup] = 'addUser'>
-    <input type="text" formControlName='firstname' placeholder="name">
+    <input type="text" formControlName='firstname' placeholder="firstname">
+    <input type="text" formControlName='lastname' placeholder="lastname">
     <input type="text" formControlName='email' placeholder="email">
-    <input type="text" formControlName='lastname' placeholder="username">
     <input type="text" formControlName='password' placeholder="password">
     
     <br> 
     <button (click)='postUser(selectedUser)' [disabled]='addUser.invalid'>{{(selectedUser) ? 'Update User' : 'Add User'}}</button>
-    <button (click)="login()">Login</button>
+    <!-- <button (click)="login()">Login</button> -->
 </form>
 
 

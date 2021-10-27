@@ -1,9 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { PostService } from 'src/app/services/post.service';
 import { AppState } from 'src/app/store';
+import { createPost, loadPosts } from 'src/app/store/actions/post/post.actions';
 import { logoutUser } from 'src/app/store/actions/user/user.actions';
+import { postsSelector } from 'src/app/store/selectors/post/post.selectors';
+import { Post } from '../../../../../shared/models/post.model';
 
 
 
@@ -23,14 +28,35 @@ export class HomeComponent implements OnInit {
   'https://upload.wikimedia.org/wikipedia/commons/9/9a/Swepac_FB_465%2C_RV70%2C_with_passing_lorry.jpg'
 ];
   // subs: Subscription[] = [];
-  posts: any[] = [];
+  // posts: any[] = [];
 //  user: UserData;
+addPost: FormGroup;
+  posts$: Observable<Post[]>;
+
+  
+  @Input() public posts: Post[] = [];
+  @Input() public selectedPost: Post | null = null;
+
 
 
   constructor(private router: Router,
-              private store: Store<AppState>) { }
+              private store: Store<AppState>,
+              private fb: FormBuilder,
+              private postService: PostService,
+             ) {
+
+    this.posts$ = this.store.select(postsSelector);
+
+    this.addPost = this.fb.group({
+
+      // title: ['', Validators.required],
+      message: ['', Validators.required],
+
+    });
+              }
 
   ngOnInit(): void {
+    this.store.dispatch(loadPosts());
   }
 
   goToUsers(){
@@ -42,6 +68,9 @@ export class HomeComponent implements OnInit {
     this.store.dispatch(logoutUser());
     
   }
-
+  AddPost(){
+    this.store.dispatch(createPost({ data: this.addPost.value }));
+    this.addPost.reset();
+  }
   
 }

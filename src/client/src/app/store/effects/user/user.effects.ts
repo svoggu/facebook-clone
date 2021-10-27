@@ -46,7 +46,7 @@ export class UserEffects {
       ofType(updateUser),
       mergeMap((action) =>
         this.userService.updateUser(action.data).pipe(
-          map((data) => updateUserSuccess({ data })),
+          map((data) => updateUserSuccess( data )),
           catchError((error) => of(updateUserFailure({ error })))
         )
       )

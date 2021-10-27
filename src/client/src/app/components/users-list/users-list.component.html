@@ -8,6 +8,7 @@
 </select>
 <br><br>
 <a routerLink="/posts">Posts</a>
+<app-user-input [selectedUser]="selectedUser$ | async"></app-user-input>
 
 <ul>
     <li [ngStyle]= "{ color: checkSelected(selectedUser, user) }" *ngFor='let user of users'>
@@ -20,7 +21,7 @@
         <!-- username: {{user.username}} <br> -->
         <!-- id: {{user._id}} -->
         <button (click) = "deleteUser(user)">X</button>
-        <!-- <button (click) = "selectUser(user, selectedUser)">Select & Update</button> -->
+        <button (click) = "selectUser(user, selectedUser)">U</button>
        
     </li>
 </ul>  
