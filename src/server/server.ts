@@ -9,17 +9,29 @@ import cookieParser from "cookie-parser";
 
 import dotenv from "dotenv";
 import { authHandler } from "./middleware/auth.middleware.js";
+import path from "path";
+
 dotenv.config();
+
+console.log(process.env.MONGO_URI);
+
 const access_secret = process.env.ACCESS_TOKEN_SECRET as string;
 console.log(access_secret);
 
 const saltRounds = 10;
 
 const app = express();
-const PORT = 3502;
+// const server = http.createServer(app);
+const __dirname = path.resolve();
+const clientPath = path.join(__dirname, '/dist/client');
+app.use(express.static(clientPath));
+console.log(clientPath);
+
+const PORT = 3000;
 
 mongoose
-  .connect("mongodb://localhost:27017/facebookdb")
+  // .connect("mongodb://localhost:27017/facebookdb")
+  .connect(`${process.env.MONGO_URI}`)
   .then(() => {
     console.log("Connected to DB Successfully");
   })
@@ -28,15 +40,15 @@ mongoose
 app.use(cookieParser())
 app.use(cors({
     credentials: true,
-    origin: ['http://localhost:4202', 'http://localhost:3502', 'http://localhost:8080']
+    origin: ['http://localhost:4202', 'http://localhost:3000', 'http://localhost:8080']
 }));
 app.use(express.json());
 
-app.get("/", function (req, res) {
+app.get("/api/", function (req, res) {
   res.json({ message: "test" });
 });
 
-app.get("/posts", function (req, res) {
+app.get("/api/posts", function (req, res) {
   PostModel.find()
     .then((data) => res.json({ data }))
     .catch((err) => {
@@ -45,7 +57,7 @@ app.get("/posts", function (req, res) {
     });
 });
 
-app.post("/create-post", function (req, res) {
+app.post("/api/create-post", function (req, res) {
   const { message } = req.body;
   const post = new PostModel({
    
@@ -63,7 +75,7 @@ app.post("/create-post", function (req, res) {
     });
 });
 
-app.get("/users", authHandler, function (req: any, res) {
+app.get("/api/users", authHandler, function (req: any, res) {
   UserModel.find({}, '-password')
     .then((data) => res.json({ data }))
     .catch((err) => {
@@ -72,7 +84,7 @@ app.get("/users", authHandler, function (req: any, res) {
     });
 });
 
-app.post("/create-user", function (req, res) {
+app.post("/api/create-user", function (req, res) {
   const { firstname, email, lastname, password } = req.body;
 
   bcrypt.genSalt(saltRounds, function (err, salt) {
@@ -99,7 +111,7 @@ app.post("/create-user", function (req, res) {
 
 
 
-app.delete("/delete-user/:id", function (req, res) {
+app.delete("/api/delete-user/:id", function (req, res) {
   const _id = req.params.id;
   UserModel.findByIdAndDelete(_id).then((data) => {
     console.log(data);
@@ -107,7 +119,7 @@ app.delete("/delete-user/:id", function (req, res) {
   });
 });
 
-app.put("/update-user/:id", function (req, res) {
+app.put("/api/update-user/:id", function (req, res) {
   console.log("Update user");
   UserModel.findByIdAndUpdate(
     req.params.id,
@@ -127,7 +139,7 @@ app.put("/update-user/:id", function (req, res) {
   );
 });
 
-app.get('/logout', authHandler,function(req,res){
+app.get('/api/logout', authHandler,function(req,res){
   res.cookie('jwt', '', {
     httpOnly: true,
     maxAge: 60*60 * 1000,
@@ -135,7 +147,7 @@ app.get('/logout', authHandler,function(req,res){
 res.json({message: 'Successfully Logged out'})
 })
 
-app.post("/login", function (req, res) {
+app.post("/api/login", function (req, res) {
   const { email, password } = req.body;
 
   UserModel.findOne({ email })
@@ -161,12 +173,26 @@ app.post("/login", function (req, res) {
     });
 });
 
-app.get('/check-login', authHandler, (req, res) => {
+app.get('/api/check-login', authHandler, (req, res) => {
   res.json({message: 'yes'});
-})
+});
+
+
+// app.get("/api/test", function (req, res) {
+//   res.json({message: "Hello World"});
+// });
+
+app.get("/api/*", function (req,res) {
+  res.sendStatus(404);
+});
 
 app.listen(PORT, function () {
   console.log(`starting at localhost http://localhost:${PORT}`);
 });
 
 
+app.all("*", function (req, res) {
+  const filePath = path.join(__dirname, '/dist/client/index.html');
+  console.log(filePath);
+  res.sendFile(filePath);
+  });
