@@ -141,3 +141,48 @@
   align-items: center;
   justify-content: center;
   }
+
+  /*  media for screens  */
+@media (max-width: 767.98px) { 
+
+  .dashboard {
+      width: 100%;
+  }
+
+  .dashboard .login{
+      border-right: none;
+      border-bottom: 1px solid #e6e6e6;
+      margin-bottom: 30px;
+      padding-bottom: -40px;
+      
+  }
+  .dashboard .social {
+      padding-left: 15px;
+  }
+  .dashboard .social a {
+      font-size: 14px;
+  }
+  .create-account {
+      width:100%
+  }
+}
+
+/* small devices and phones */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .login__header {
+      padding-left:50px;
+      padding-right:50px;
+  }
+}
+
+@media (max-width: 991.98px) { 
+  .dashboard {
+      width: 100%;
+  }
+  .login__header {
+      padding-top: 15px;
+  }
+  .create-account {
+      width:100%
+  }
+}
