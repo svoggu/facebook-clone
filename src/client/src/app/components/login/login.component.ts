@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -26,7 +26,8 @@ export class LoginComponent implements OnInit, OnChanges {
               private store: Store<AppState>,
               private router:Router,
               private matDialog: MatDialog,
-              private apiService: ApiService)
+              private apiService: ApiService,
+              public dialogRef: MatDialogRef<RegisterComponent>)
    { 
     this.users$ = this.store.select(usersSelector);
     this.selectedUser$ = this.store.select(selectedUserSelector);
@@ -69,11 +70,10 @@ export class LoginComponent implements OnInit, OnChanges {
     // }
 
     openRegister(): void {
-      const dialogRef = this.matDialog.open(RegisterComponent, {
-        role: 'dialog',
-        height: '480px',
-        width: '480px'
-      });
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.autoFocus = true;
+      const dialogRef = this.matDialog.open(RegisterComponent, 
+       dialogConfig);
 
       
     }

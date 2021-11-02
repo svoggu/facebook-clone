@@ -94,7 +94,7 @@ loginFailure$ = createEffect(() =>
     ofType(loginUserFailure),
     mergeMap((action) =>{
       console.log(action);
-     this.router.navigate(['register']);
+     this.router.navigate(['login']);
      return of(loginFailureRedirect()) }
       
     )

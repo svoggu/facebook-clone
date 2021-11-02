@@ -25,6 +25,7 @@ import { HomeModule } from './components/home/home.module';
 // import { PostsComponent } from './components/posts/posts.component';
 import * as fromPost from './store/reducers/post/post.reducer';
 import { PostEffects } from './store/effects/post/post.effects';
+import { MatDialogRef } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { PostEffects } from './store/effects/post/post.effects';
     StoreModule.forFeature(fromPost.postFeatureKey, fromPost.reducer),
         
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [{provide: MatDialogRef, useValue: {}}, ],
+  bootstrap: [AppComponent],
+  entryComponents: [RegisterComponent]
 })
 export class AppModule { }
