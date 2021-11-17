@@ -28,11 +28,12 @@
     </div>
     <div class="home__header__right">
       <div>
-        <!-- <img
+        <img
           alt=""
           mat-card-avatar
-          [src]="user?.avatar"> -->
-        <img alt="" mat-card-avatar />
+          src={{loggedUser?.imageUrl}} />
+        <!-- <img alt="" mat-card-avatar /> -->
+        <p>{{loggedUser?.firstname}}</p>
         <!-- <span class="name">{{ user?.firstName || 'Sirisha'}}</span> -->
         <span class="name"></span>
       </div>

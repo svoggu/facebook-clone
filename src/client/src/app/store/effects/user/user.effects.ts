@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 
-import { catchError, map, mergeMap } from 'rxjs/operators';
+import { catchError, map, mergeMap, tap } from 'rxjs/operators';
 import { UserService } from 'src/app/services/user.service';
 import {
   createUser,
@@ -82,6 +82,7 @@ export class UserEffects {
     ofType(loginUser),
     mergeMap((action) =>
       this.userService.login(action.data).pipe(
+        tap((data) => console.log(data,'effects working')),
         map((data) => loginUserSuccess({ data })),
         catchError((error) => of(loginUserFailure({ error })))
       )
@@ -95,7 +96,8 @@ loginFailure$ = createEffect(() =>
     mergeMap((action) =>{
       console.log(action);
      this.router.navigate(['login']);
-     return of(loginFailureRedirect()) }
+     return of(loginFailureRedirect()) 
+    }
       
     )
   )

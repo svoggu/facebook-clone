@@ -153,7 +153,7 @@ app.post("/api/login", function (req, res) {
   const { email, password } = req.body;
 
   UserModel.findOne({ email })
-    .then((user) => {
+    .then((user:any) => {
         console.log(user);
       
       bcrypt.compare(password, `${user?.password}`, function (err, result) {
@@ -163,8 +163,11 @@ app.post("/api/login", function (req, res) {
           res.cookie('jwt', accessToken, {
               httpOnly: true,
               maxAge: 60*60 * 1000,
-          })
-          res.json({message: 'Successfully Logged In'})
+                      })
+           delete user.password;           
+                      
+          // res.json({message: 'Successfully Logged In'})
+          res.json({data:user})
         } else {
           res.sendStatus(403);
         }

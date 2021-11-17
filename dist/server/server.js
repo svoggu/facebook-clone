@@ -133,7 +133,9 @@ app.post("/api/login", function (req, res) {
                     httpOnly: true,
                     maxAge: 60 * 60 * 1000,
                 });
-                res.json({ message: 'Successfully Logged In' });
+                delete user.password;
+                // res.json({message: 'Successfully Logged In'})
+                res.json({ data: user });
             }
             else {
                 res.sendStatus(403);

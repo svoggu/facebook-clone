@@ -1,3 +1,4 @@
+
 <div class="login-container">
   <header class="login__header">
     <div class="login__header__left">
@@ -15,6 +16,9 @@
             <input type="password" formControlName="password" placeholder="password" />
             
             <button (click)="login()" class="login-button">Login</button>
+
+            <p *ngIf="(loginFailMessage$ | async)">Invalid credentials</p>
+
           </form>
           <a>Forgotten account?</a>
           

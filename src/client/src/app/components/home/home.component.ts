@@ -8,7 +8,9 @@ import { AppState } from 'src/app/store';
 import { createPost, loadPosts } from 'src/app/store/actions/post/post.actions';
 import { logoutUser } from 'src/app/store/actions/user/user.actions';
 import { postsSelector } from 'src/app/store/selectors/post/post.selectors';
+import { loggedUserSelector } from 'src/app/store/selectors/user/user.selectors';
 import { Post } from '../../../../../shared/models/post.model';
+import { User } from '../../../../../shared/models/user.model';
 
 
 
@@ -30,15 +32,15 @@ export class HomeComponent implements OnInit {
   // subs: Subscription[] = [];
   // posts: any[] = [];
 //  user: UserData;
-addPost: FormGroup;
+  addPost: FormGroup;
   posts$: Observable<Post[]>;
+  // loggedUser$: Observable<User | null>;
+  loggedUser: User | null = null;
 
   
   @Input() public posts: Post[] = [];
   @Input() public selectedPost: Post | null = null;
-
-
-
+  
   constructor(private router: Router,
               private store: Store<AppState>,
               private fb: FormBuilder,
@@ -53,6 +55,9 @@ addPost: FormGroup;
       message: ['', Validators.required],
 
     });
+
+    this.store.select(loggedUserSelector).subscribe(data =>
+      this.loggedUser = data)
               }
 
   ngOnInit(): void {

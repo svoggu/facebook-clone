@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 import { ApiService } from 'src/app/services/api.service';
 import { AppState } from 'src/app/store';
 import { loginUser } from 'src/app/store/actions/user/user.actions';
-import { selectedUserSelector, usersSelector } from 'src/app/store/selectors/user/user.selectors';
+import { loginFailureSelector, selectedUserSelector, usersSelector } from 'src/app/store/selectors/user/user.selectors';
 import { User } from '../../../../../shared/models/user.model';
 import { RegisterComponent } from '../register/register.component';
 
@@ -19,6 +19,7 @@ import { RegisterComponent } from '../register/register.component';
 export class LoginComponent implements OnInit, OnChanges {
   users$: Observable<User[]>;
   selectedUser$: Observable<User | null>;
+  loginFailMessage$: Observable<String> 
   loginForm: FormGroup;
   @Input() selectedUser: User | null = null;
 
@@ -27,7 +28,8 @@ export class LoginComponent implements OnInit, OnChanges {
               private router:Router,
               private matDialog: MatDialog,
               private apiService: ApiService,
-              public dialogRef: MatDialogRef<RegisterComponent>)
+              public dialogRef: MatDialogRef<RegisterComponent>,
+              )
    { 
     this.users$ = this.store.select(usersSelector);
     this.selectedUser$ = this.store.select(selectedUserSelector);
@@ -43,8 +45,9 @@ export class LoginComponent implements OnInit, OnChanges {
         Validators.compose([Validators.required, Validators.minLength(5)]),
       ],
     });
-  
 
+   this.loginFailMessage$ = this.store.select(loginFailureSelector);
+     
   }
 
   ngOnInit(): void {
