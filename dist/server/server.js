@@ -6,6 +6,8 @@ import { UserModel } from "./schemas/user.schema.js";
 import mongoose from "mongoose";
 import jwt from 'jsonwebtoken';
 import cookieParser from "cookie-parser";
+import "multer";
+import "multer-gridfs-storage";
 import dotenv from "dotenv";
 import { authHandler } from "./middleware/auth.middleware.js";
 import path from "path";
@@ -22,13 +24,47 @@ app.use(express.static(clientPath));
 console.log(clientPath);
 // const PORT = 3000;
 const PORT = process.env.PORT || 3000;
+let gfs;
+const mongoURI = "mongodb://localhost:27017/facebookdb";
 mongoose
     // .connect("mongodb://localhost:27017/facebookdb")
     .connect(`${process.env.MONGO_URI}`)
     .then(() => {
     console.log("Connected to DB Successfully");
+    gfs = new mongoose.mongo.GridFSBucket(mongoose.connection.db, {
+        bucketName: "uploads",
+    });
 })
     .catch((err) => console.log("Failed to Connect to DB", err));
+//Storage
+// const storage = new GridFsStorage({
+//   url: mongoURI,
+//   file: (req, file) => {
+//     return new Promise((resolve, reject) => {
+// crypto.randomBytes(16, (err, buf) => {
+//   if (err) {
+//     return reject(err);
+//   }
+// const filename = buf.toString("hex") + path.extname(file.originalname);
+// const fileInfo = {
+//   filename: file.originalname,
+//   bucketName: "uploads",
+//         };
+//         resolve(fileInfo);
+//              });
+//             });
+//           },
+//         });
+// const upload = multer({storage: storage});
+// app.post("/file", upload.single("file"), (req, res, next) => {
+//   res.redirect("/");
+//   const file = req.file;
+//   console.log(file!.filename);
+//   if (!file) {
+//     throw new Error();
+//   }
+//   res.send(file);
+// });
 app.use(cookieParser());
 app.use(cors({
     credentials: true,
