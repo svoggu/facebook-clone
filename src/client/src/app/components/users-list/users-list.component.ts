@@ -16,6 +16,8 @@ import { User } from '../../../../../shared/models/user.model';
 })
 export class UsersListComponent implements OnInit {
 
+  filterString: string ='';
+
   users$: Observable<User[]>;
   selectedUser$: Observable<User | null>;
 

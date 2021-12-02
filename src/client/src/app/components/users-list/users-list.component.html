@@ -10,8 +10,10 @@
 <a routerLink="/posts">Posts</a>
 <app-user-input [selectedUser]="selectedUser$ | async"></app-user-input>
 
+<input type="text" class="form-control" [(ngModel)] = "filterString" placeholder="search" />
+
 <ul>
-    <li [ngStyle]= "{ color: checkSelected(selectedUser, user) }" *ngFor='let user of users'>
+    <li [ngStyle]= "{ color: checkSelected(selectedUser, user) }" *ngFor='let user of users | filter:filterString'>
         {{user.firstname}}  {{user.lastname}}
         
         <button (click) = "deleteUser(user)">X</button>

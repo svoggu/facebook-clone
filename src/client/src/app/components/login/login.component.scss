@@ -167,6 +167,13 @@
   }
 }
 
+p {
+  color: red;
+  text-align: center;
+  text-transform: uppercase;
+  // font-weight: bold;
+}
+
 /* small devices and phones */
 @media (min-width: 576px) and (max-width: 767.98px) {
   .login__header {

@@ -26,6 +26,7 @@ import { HomeModule } from './components/home/home.module';
 import * as fromPost from './store/reducers/post/post.reducer';
 import { PostEffects } from './store/effects/post/post.effects';
 import { MatDialogRef } from '@angular/material/dialog';
+import { FilterPipe } from './pipes/filter.pipe';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { MatDialogRef } from '@angular/material/dialog';
     PageUsersComponent,
     RegisterComponent,
     LoginComponent,
+    FilterPipe,
     
    
   ],
