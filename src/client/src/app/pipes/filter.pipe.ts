@@ -14,7 +14,10 @@ export class FilterPipe implements PipeTransform {
 
   const users = [];
   for (const user of value) {
-    if (user.name === filterString){
+    console.log(user);
+    if (user.firstname.includes(filterString) ||
+        user.email.includes(filterString)){
+    
      users.push(user);
     }
   }
